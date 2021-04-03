@@ -1,7 +1,6 @@
 
 const PlayerService = {
   findByUserName(db, user_name) {
-    console.log({user_name});
     return db('catan_players')
       .select('*')
       .where({user_name})

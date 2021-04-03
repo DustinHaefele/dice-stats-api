@@ -1,6 +1,4 @@
-const { count } = require('console');
 const express = require('express');
-const path = require('path');
 const GameRouter = express.Router();
 const GameService = require('../services/game-service');
 const PlayerService = require('../services/player-service');
