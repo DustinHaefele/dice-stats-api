@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
+const GameRouter = require('./routers/game-router.js');
 
 const app = express();
 
@@ -13,9 +14,12 @@ app.use(morgan(morganOption));
 app.use(cors());
 app.use(helmet());
 
+app.use('/api/game', GameRouter);
+
 app.get('/', (req, res) => {
-  res.send('Hello, world!');
+  res.send(true);
 });
+
 
 app.use(function errorHandler(error, req, res, next){
   let response;
