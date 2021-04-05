@@ -7,7 +7,7 @@ const db = knex({
   connection: {
     host: 'ec2-54-196-33-23.compute-1.amazonaws.com',
     port: 5432,
-    username: 'jzedhnujsodgbh',
+    user: 'jzedhnujsodgbh',
     database: 'dfo09pjethtvv7',
     ssl: { rejectUnauthorized: false },
     password: 'f13d0ab6dae055f57563f53743bcc2a7d85e612705b6253611d5fcf98e2fbc5f'
