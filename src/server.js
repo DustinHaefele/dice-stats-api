@@ -1,8 +1,8 @@
 const app = require('./app');
-const {PORT, DB_URL} = require('./config');
+const {PORT, DATABASE_URL} = require('./config');
 const knex = require('knex');
-const parse = require(DB_URL).parse;
-const pgconfig = parse(DB_URL);
+const parse = require(DATABASE_URL).parse;
+const pgconfig = parse(DATABASE_URL);
 pgconfig.ssl = { rejectUnauthorized: false };
 
 const db = knex({
