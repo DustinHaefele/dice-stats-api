@@ -6,10 +6,22 @@ const PlayerService = {
       .where({user_name})
       .first();
   },
-  addWinToPlayer(db, userName) {
-    const user = this.findByUserName(db, userName);
-    user.wins++; 
-    return db('catan_players').update(user).where('id', user.id);
+  findUserById(db, id) {
+    return db('catan_players')
+      .select('*')
+      .where({id})
+      .first();
+  },
+  addWinToPlayer(db, user) {
+    const id = user.id;
+    user.wins++;
+    user.games_played++;
+    return db('catan_players').update(user).where({id});
+  },
+  addLossToPlayer(db, user) {
+    const id = user.id;
+    user.games_played++;
+    return db('catan_players').update(user).where({id});
   }
 
 
