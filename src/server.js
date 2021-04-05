@@ -1,13 +1,17 @@
 const app = require('./app');
 const {PORT, DATABASE_URL} = require('./config');
 const knex = require('knex');
-const parse = require(DATABASE_URL).parse;
-const pgconfig = parse(DATABASE_URL);
-pgconfig.ssl = { rejectUnauthorized: false };
 
 const db = knex({
   client: 'pg',
-  connection: pgconfig
+  connection: {
+    host: 'ec2-54-196-33-23.compute-1.amazonaws.com',
+    port: 5432,
+    username: 'jzedhnujsodgbh',
+    database: 'dfo09pjethtvv7',
+    ssl: { rejectUnauthorized: false },
+    password: 'f13d0ab6dae055f57563f53743bcc2a7d85e612705b6253611d5fcf98e2fbc5f'
+  }
 });
 
 app.set('db',db);
