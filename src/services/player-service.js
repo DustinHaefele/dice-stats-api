@@ -30,14 +30,17 @@
 
   async function getPlayerStats(req, res) {
     const playersArray = [];
+    const response = {}
     try {
       const players = await getAllPlayers(req.app.get('db'))
       players.forEach(player=> {
         if(player.games_played > 0) {
           player.win_pct = player.wins / player.games_played;
         } else { player.win_pct = 0}
+
       });
-      return res.json(players);
+      response.players = players;
+      return res.json(response);
     } catch(e){
       console.error(e.message);
     }
