@@ -1,4 +1,4 @@
-const PlayerService = require('./player-service');
+const {findByUserName, addLossToPlayer, addWinToPlayer} = require('./player-service');
   
   async function addGameToTable(db, game) {
     const isValid = validateGame(game);
@@ -13,17 +13,17 @@ const PlayerService = require('./player-service');
     const {countMap, winner, losers} = req.body;
   
     const db = req.app.get('db');
-    const user = await PlayerService.findByUserName(db, winner)
+    const user = await findByUserName(db, winner)
   
       if(!user) {
         return res.status(400).json('no user found');
       }
       countMap.winner = user.id;
   
-      await PlayerService.addWinToPlayer(db, user)
+      await addWinToPlayer(db, user)
       losers.forEach(async (loserName) => {
-        const loser = await PlayerService.findByUserName(db, loserName);
-        await PlayerService.addLossToPlayer(db, loser);
+        const loser = await findByUserName(db, loserName);
+        await addLossToPlayer(db, loser);
       })
       const game = await addGameToTable(db, countMap)
       return res.json(game);

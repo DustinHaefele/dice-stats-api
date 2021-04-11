@@ -5,6 +5,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
 const GameRouter = require('./routers/game-router.js');
+const PlayersRouter = require('./routers/players-router.js');
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(cors());
 app.use(helmet());
 
 app.use('/api/game', GameRouter);
+app.use('/api/player', PlayersRouter);
 
 app.get('/', (req, res) => {
   res.send(true);

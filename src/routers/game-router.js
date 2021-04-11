@@ -1,7 +1,6 @@
 const express = require('express');
 const GameRouter = express.Router();
 const {postGameStats, getGameStats} = require('../services/game-service');
-const PlayerService = require('../services/player-service');
 const jsonBodyParser = express.json();
 
 GameRouter.post('/', jsonBodyParser, postGameStats);
