@@ -28,6 +28,10 @@
       .select('*');
   };
 
+  async function insertPlayer(db, player) {
+    return db('catan_players').insert(player).returning('*');
+  }
+
   async function getPlayerStats(req, res) {
     const playersArray = [];
     const response = {}
@@ -45,6 +49,19 @@
       console.error(e.message);
     }
 
+  };
+
+  async function addPlayer(req, res) {
+    let player
+    try{
+      const db = req.app.get('db');
+      player = req.body;
+      insertPlayer(db, player);
+    } catch(e) {
+      console.error(e);
+      res.status(500).send("ERROR");
+    }
+    res.json(player);
   }
 
-module.exports = {findByUserName, findUserById, addWinToPlayer, addLossToPlayer, getAllPlayers, getPlayerStats};
+module.exports = {findByUserName, findUserById, addWinToPlayer, addLossToPlayer, getAllPlayers, getPlayerStats, addPlayer};
